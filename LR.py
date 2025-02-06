@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
+from tensorflow.keras.optimizers import Adam  # Import Adam optimizer
 
 # ✅ Load the dataset
 file_path = "C:/Users/uragu/OneDrive/Desktop/Analog Sample/0.05% Nutrient conc.xlsx"
@@ -35,6 +36,10 @@ split = int(0.8 * len(X))
 X_train, X_test = X[:split], X[split:]
 y_train, y_test = y[:split], y[split:]
 
+# 🔹 **Manually Set Learning Rate**
+learning_rate = 1.0  # << Change this value as needed
+optimizer = Adam(learning_rate=learning_rate)
+
 # ✅ Build RNN model using LSTM
 model = Sequential([
     LSTM(50, return_sequences=True, input_shape=(seq_length, 1)),  
@@ -44,17 +49,17 @@ model = Sequential([
 ])
 
 # ✅ Compile the model
-model.compile(optimizer='adam', loss='mse')
+model.compile(optimizer=optimizer, loss='mse')
 
 # ✅ Train the model & store history
-history = model.fit(X_train, y_train, epochs=1000, batch_size=8, validation_data=(X_test, y_test), verbose=1)
+history = model.fit(X_train, y_train, epochs=100, batch_size=8, validation_data=(X_test, y_test), verbose=1)
 
 # ✅ Plot Learning Curve (Loss vs. Epochs)
 plt.plot(history.history['loss'], label='Training Loss')
 plt.plot(history.history['val_loss'], label='Validation Loss')
 plt.xlabel('Epochs')
 plt.ylabel('Loss (MSE)')
-plt.title('Learning Curve of RNN')
+plt.title(f'Learning Curve (LR={learning_rate})')
 plt.legend()
 plt.grid()
 plt.show()
