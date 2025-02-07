@@ -37,7 +37,7 @@ X_train, X_test = X[:split], X[split:]
 y_train, y_test = y[:split], y[split:]
 
 # Define different learning rates to test
-learning_rates = [1.0, 0.1, 0.01, 0.001, 0.0001]
+learning_rates = [1.0]
 histories = {}
 
 # Train models with different learning rates
