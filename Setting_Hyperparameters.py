@@ -27,7 +27,7 @@ def create_sequences(data, seq_length):
 
 # Hyperparameters
 seq_length = 5  # Length of input sequences
-lstm_units = 1000  # Number of LSTM units per layer
+lstm_units = 10  # Number of LSTM units per layer
 batch_size = 8   # Batch size for training
 epochs = 50      # Number of training epochs
 learning_rate = 0.01  # Learning rate

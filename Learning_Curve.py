@@ -43,7 +43,7 @@ def train_lstm(learning_rate):
     return history.history['loss']
 
 # Test different learning rates
-learning_rates = [0.0001, 0.0005, 0.001, 0.005, 0.01]
+learning_rates = [0.0001]
 loss_curves = {}
 
 for lr in learning_rates:
